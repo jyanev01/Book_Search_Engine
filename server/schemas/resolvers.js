@@ -16,7 +16,7 @@ const resolvers = {
     },
 
     Mutation: {
-        login: async (parent, {eail, password}) =>{
+        login: async (parent, {email, password}) =>{
             const user = await User.findOne({ email});
             if(!user) {
                 throw new AuthenticationError("Incorrect credentials");
@@ -39,7 +39,7 @@ const resolvers = {
             if (context.user) {
                 const updateUser = await User.findOneAndUpdate(
                     {_id: context.user._id},
-                    {$addToSet: { savedBook: body}},
+                    {$addToSet: { savedBooks: body}},
                     {new: True}
                 );
                 return updatedUser;
